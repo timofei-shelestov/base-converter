@@ -1,0 +1,10 @@
+{
+	"id": "base-converter",
+	"name": "Base Conveter",
+	"version": "1.0.0",
+	"minAppVersion": "0.15.0",
+	"description": "Lets you convert selected number to different base",
+	"author": "Obsidian",
+	"authorUrl": "https://github.com/timofei-shelestov",
+	"isDesktopOnly": true
+}

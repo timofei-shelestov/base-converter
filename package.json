@@ -1,0 +1,17 @@
+{
+  "name": "base-converter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.ts",
+  "scripts": {
+    "build": "tsc main.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.16.0",
+  "dependencies": {
+    "obsidian": "^1.8.7",
+    "typescript": "^5.9.2"
+  }
+}
