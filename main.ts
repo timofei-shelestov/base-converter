@@ -33,17 +33,17 @@ export default class BaseConverter extends Plugin {
 }
 
 const BinaryToDecimal = (input: string) => {
-  window.navigator.clipboard.writeText(input);
+  window.navigator.clipboard.writeText(parseInt(input, 2).toString());
 };
 
 const DecimalToBinary = (input: string) => {
-  console.log("DecimalToBinary");
+  window.navigator.clipboard.writeText(parseInt(input, 10).toString(2));
 };
 
 const DecimalToHexidecimal = (input: string) => {
-  console.log("DecimalToHexidecimal");
+  window.navigator.clipboard.writeText(parseInt(input, 10).toString(16));
 };
 
 const HexidecimalToDecimal = (input: string) => {
-  console.log("HexidecimalToDecimal ");
+  window.navigator.clipboard.writeText(parseInt(input, 16).toString(10));
 };
