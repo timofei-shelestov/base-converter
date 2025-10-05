@@ -1,45 +1,49 @@
-import { Plugin } from "obsidian";
-
-interface Dictionary<T> {
-  [key: string]: T;
-}
-
-const map: Dictionary<boolean> = {};
+import { Editor, Plugin } from "obsidian";
 
 export default class BaseConverter extends Plugin {
   onload(): Promise<void> | void {
-    document.addEventListener("keydown", (event) => {
-      map[event.key] = true;
-      if (window.getSelection()) {
-        const selectedText = window.getSelection()!.toString();
-        if (map.valueOf.length === 3) {
-          if (map["Control"] && map["b"] && map["d"]) {
-            BinaryToDecomal(selectedText);
-          }
+    this.addCommand({
+      id: "binary-to-decimal",
+      name: "Convert selected number from binary to decimal",
+      editorCallback: (editor: Editor) =>
+        BinaryToDecimal(editor.getSelection()),
+    });
 
-          if (map["Control"] && map["d"] && map["b"]) {
-            DecimalToBinary(selectedText);
-          }
+    this.addCommand({
+      id: "decimal-to-binary",
+      name: "Convert selected number from decimal to binary",
+      editorCallback: (editor: Editor) =>
+        DecimalToBinary(editor.getSelection()),
+    });
 
-          if (map["Control"] && map["d"] && map["h"]) {
-            DecimalToHexidecimal(selectedText);
-          }
+    this.addCommand({
+      id: "decimal-to-hexidecimal",
+      name: "Convert selected number from decimal to hexidecimal",
+      editorCallback: (editor: Editor) =>
+        DecimalToHexidecimal(editor.getSelection()),
+    });
 
-          if (map["Control"] && map["h"] && map["d"]) {
-            HexidecimalToDecimal(selectedText);
-          }
-        }
-      }
+    this.addCommand({
+      id: "hexidecimal-to-decimal",
+      name: "Convert selected number from hexidecimal to decimal",
+      editorCallback: (editor: Editor) =>
+        HexidecimalToDecimal(editor.getSelection()),
     });
   }
 }
 
-const BinaryToDecomal = (input: string) => {
-  console.log("Worked!!!!");
+const BinaryToDecimal = (input: string) => {
+  window.navigator.clipboard.writeText(input);
 };
 
-const DecimalToBinary = (input: string) => {};
+const DecimalToBinary = (input: string) => {
+  console.log("DecimalToBinary");
+};
 
-const DecimalToHexidecimal = (input: string) => {};
+const DecimalToHexidecimal = (input: string) => {
+  console.log("DecimalToHexidecimal");
+};
 
-const HexidecimalToDecimal = (input: string) => {};
+const HexidecimalToDecimal = (input: string) => {
+  console.log("HexidecimalToDecimal ");
+};
