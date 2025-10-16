@@ -1,4 +1,4 @@
-import { Editor, Plugin } from "obsidian";
+import { Editor, Notice, Plugin } from "obsidian";
 
 export default class BaseConverter extends Plugin {
   onload(): Promise<void> | void {
@@ -32,18 +32,42 @@ export default class BaseConverter extends Plugin {
   }
 }
 
+const handleConversion = (
+  input: string,
+  inputBase: number,
+  targetBase: number
+) => {
+  let output = 0;
+  if (targetBase !== 10) {
+    //convert from input base to decimal
+    output = parseInt(input, inputBase);
+
+    //convert to target base
+    output = parseInt(output.toString(targetBase));
+  }
+  output = parseInt(input, inputBase);
+  if (Number.isNaN(output)) {
+    const notice = new Notice(
+      "Error: Provided value is not a valid input for this command"
+    );
+    notice.messageEl;
+    return;
+  }
+  window.navigator.clipboard.writeText(output.toString());
+};
+
 const BinaryToDecimal = (input: string) => {
-  window.navigator.clipboard.writeText(parseInt(input, 2).toString());
+  handleConversion(input, 2, 10);
 };
 
 const DecimalToBinary = (input: string) => {
-  window.navigator.clipboard.writeText(parseInt(input, 10).toString(2));
+  handleConversion(input, 10, 2);
 };
 
 const DecimalToHexidecimal = (input: string) => {
-  window.navigator.clipboard.writeText(parseInt(input, 10).toString(16));
+  handleConversion(input, 10, 16);
 };
 
 const HexidecimalToDecimal = (input: string) => {
-  window.navigator.clipboard.writeText(parseInt(input, 16).toString(10));
+  handleConversion(input, 16, 10);
 };
